@@ -8,6 +8,28 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+
+
+  
+  <button onclick="subscribe()">Subscribe</button>
+
+  <script>
+
+    addEventListener('load', async()=>{
+      let sw = await navigator.serviceWorker.register('./sw.js')
+      console.log(sw)
+    })
+    
+    async function subscribe(){
+      let sw = await navigator.serviceWorker.ready;
+      let push = await sw.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey:'BKR9PyLA-ERtX13qzRdr8p4bj0RTbBbxdlXwEJ8zrdCiEYNpHwJB0YV0wfd2UDnihTIFmGcSH9dF4JJ8eJZ1uy0'
+      })
+      console.log(JSON.stringify(push))
+    }
+  </script>
+
   <app-root></app-root>
 </body>
 </html>
